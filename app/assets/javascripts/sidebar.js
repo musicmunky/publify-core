@@ -26,3 +26,6 @@ var bind_sortable = function() {
 $(document).ready(function() {
   bind_sortable();
 });
+function changeVal(t) {
+    $('input[type="hidden"]#' + t.id)[0].value = t.checked ? 1 : 0;
+}

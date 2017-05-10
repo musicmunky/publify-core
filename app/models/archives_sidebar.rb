@@ -1,8 +1,8 @@
 class ArchivesSidebar < Sidebar
   description 'Displays links to monthly archives'
   setting :title, 'Archives'
-  setting :show_count, true, label: 'Show article counts', input_type: :checkbox
   setting :count, 10, label: 'Number of Months'
+  setting :show_count, true, label: 'Show article counts', input_type: :checkbox, onclick: 'changeVal(this)'
 
   attr_accessor :archives
 

@@ -73,9 +73,14 @@ class SidebarField
 
   class CheckBoxField < self
     def line_html(sidebar)
-      hidden_field_tag(input_name(sidebar), 0) +
+        chk = true
+        if sidebar.config[key].to_s == "0"
+            chk = false
+        end
+
+        hidden_field_tag(input_name(sidebar), sidebar.config[key]) +
         content_tag('label',
-                    safe_join([check_box_tag(input_name(sidebar), 1, sidebar.config[key], options), label], ' '))
+                    safe_join([check_box_tag(input_name(sidebar), 1, chk, options), label], ' '))
     end
 
     def canonicalize(value)
