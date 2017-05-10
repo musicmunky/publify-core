@@ -13,7 +13,7 @@ module BaseHelper
     rendered_sidebars = (sidebars.blank? ? Sidebar.order(:active_position) : sidebars).map do |sb|
       @sidebar = sb
       sb.parse_request(content_array, params)
-      render_sidebar(sb)
+      "<div class='sidebar-wrapper'>#{render_sidebar(sb)}</div>".html_safe
     end
     safe_join rendered_sidebars
   rescue => e
