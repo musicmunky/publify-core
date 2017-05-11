@@ -77,10 +77,9 @@ class SidebarField
         if sidebar.config[key].to_s == "0"
             chk = false
         end
-
-        hidden_field_tag(input_name(sidebar), sidebar.config[key]) +
-        content_tag('label',
-                    safe_join([check_box_tag(input_name(sidebar), 1, chk, options), label], ' '))
+        field_html = hidden_field_tag(input_name(sidebar), sidebar.config[key]) +
+                content_tag('label', safe_join([check_box_tag(input_name(sidebar), 1, chk, options), label], ' '))
+        html = content_tag(:div, field_html, class: 'form-group')
     end
 
     def canonicalize(value)
