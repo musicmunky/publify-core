@@ -44,7 +44,7 @@ function get_buttons(textfilter) {
       edButtons.push(new edButton('ed_more', 'more', '\n<!--more-->\n', '', ''));
       edButtons.push(new edButton('ed_publifycode', 'publify:code', '', '\n</publify:code>\n\n', 'publify:code'));
       break;
-      
+
   case "markdown":
   case "markdown smartypants":
       edButtons.push(new edButton('ed_bold', 'b', '**', '**', 'b'));
@@ -61,7 +61,7 @@ function get_buttons(textfilter) {
       break;
 
   default:
-      edButtons.push(new edButton('ed_p', 'paragraph', '<p></p>', '', ''));
+      edButtons.push(new edButton('ed_p', 'paragraph', '<p>', '</p>', 'p'));
       edButtons.push(new edButton('ed_bold', 'bold', '<strong>', '</strong>', 'b'));
       edButtons.push(new edButton('ed_italic', 'italics', '<em>', '</em>', 'i'));
       edButtons.push(new edButton('ed_link', 'link', '', '</a>', 'a'));
