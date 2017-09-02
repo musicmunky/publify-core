@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160701062604) do
+ActiveRecord::Schema.define(version: 20170902155228) do
 
   create_table "articles_tags", id: false, force: :cascade do |t|
     t.integer "article_id"
@@ -39,15 +39,16 @@ ActiveRecord::Schema.define(version: 20160701062604) do
     t.integer  "text_filter_id"
     t.text     "whiteboard"
     t.string   "name"
-    t.boolean  "published",      default: false
+    t.boolean  "published",       default: false
     t.boolean  "allow_pings"
     t.boolean  "allow_comments"
     t.datetime "published_at"
     t.string   "state"
     t.integer  "parent_id"
     t.text     "settings"
-    t.string   "post_type",      default: "read"
-    t.integer  "blog_id",                         null: false
+    t.string   "post_type",       default: "read"
+    t.integer  "blog_id",                          null: false
+    t.text     "backgroundimage"
     t.index ["id", "type"], name: "index_contents_on_id_and_type"
     t.index ["published"], name: "index_contents_on_published"
     t.index ["text_filter_id"], name: "index_contents_on_text_filter_id"

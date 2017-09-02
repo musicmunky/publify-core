@@ -58,6 +58,7 @@ en:
         publish: Publish
         publish_settings: Publish settings
         published: Published
+        background_image: Background Image
         save: Save
         save_as_draft: Save as draft
         status: Status

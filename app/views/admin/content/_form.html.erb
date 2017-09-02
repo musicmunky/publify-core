@@ -80,6 +80,22 @@
                 </p>
               </div>
             </div>
+            <div class='control-group'>
+              <p>
+                <%= t('.background_image') %>:
+                <%= toggle_element('backgroundimage') %>
+              </p>
+              <div id="backgroundimage" class="collapse">
+                <div class="form-group">
+                  <%= text_field 'article', 'backgroundimage', {autocomplete: 'off', class: 'form-control'} %>
+                </div>
+                <p>
+                  <span class="btn btn-mini btn-default">
+                    <%= toggle_element('backgroundimage', t('.ok')) %>
+                  </span>
+                </p>
+              </div>
+            </div>
             <div class="control-group">
               <p>
                 <%= t('.status') %>: <strong><%= @article.state.to_s.downcase %></strong>
