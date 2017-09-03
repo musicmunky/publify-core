@@ -15,9 +15,17 @@
       <% end %>
       <%= show_actions article %>
     </td>
+    <td><%= article.state %></td>
     <td>
-      <%= author_link(article)%><br>
-      <small><%= l(article.published_at || article.created_at) %></small>
+        <% if !article.post_type.nil? %>
+            <%= article.post_type.split("-").join(" ").titleize %>
+        <% end %>
+    </td>
+    <td>
+      <%= author_link(article)%>
+    </td>
+    <td>
+        <%= l(article.published_at || article.created_at) %>
     </td>
     <td>
       <%= (article.allow_comments?) ? link_to("#{article.comments.ham.size.to_s} <i class='glyphicon glyphicon-comment'></i>".html_safe, controller: '/admin/feedback', id: article.id, action: 'article') : '-' %></td>
