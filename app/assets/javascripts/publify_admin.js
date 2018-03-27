@@ -80,9 +80,8 @@ function save_article_tags() {
 }
 
 function doneTyping () {
-  $( "#save-bar").fadeIn(2000, function() {
-
-  });
+  //$( "#save-bar").fadeIn(2000, function() {
+  //});
 }
 
 function set_savebar() {
@@ -90,9 +89,9 @@ function set_savebar() {
   var doneTypingInterval = 3000;
 
   $( "#article_body_and_extended" ).keydown(function() {
-    $( "#save-bar").fadeOut(2000, function() {
+    //$( "#save-bar").fadeOut(2000, function() {
 
-    });
+    //});
     clearTimeout(typingTimer);
   });
 

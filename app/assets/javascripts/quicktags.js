@@ -70,6 +70,7 @@ function get_buttons(textfilter) {
       edButtons.push(new edButton('ed_ol', 'ol', '<ol>\n', '</ol>\n\n', 'o'));
       edButtons.push(new edButton('ed_li', 'li', '\t<li>', '</li>\n', 'l'));
       edButtons.push(new edButton('ed_block', 'b-quote', '<blockquote>', '</blockquote>', 'q'));
+      edButtons.push(new edButton('ed_figcaption', 'summary', '<figcaption>', '</figcaption>', 'f'));
       //edButtons.push(new edButton('ed_del', 'del', '<del>', '</del>'));
       //edButtons.push(new edButton('ed_code', 'code', '<code>', '</code>', 'c'));
       //edButtons.push(new edButton('ed_more', 'more', '\n<!--more-->\n', '', ''));
@@ -377,7 +378,14 @@ function edInsertImage(which) {
     myField = document.getElementById(which);
 	var myValue = prompt('Enter the URL of the image', 'http://');
 	if (myValue && myValue.length > 0) {
-		myValue = '<img src="'
+        var aMyValue = [];
+        var sImage = "";
+        try {
+            aMyValue = myValue.split("/");
+            sImage = aMyValue[aMyValue.length - 1];
+        }
+        catch(err){ console.log("error attempting to get image name"); }
+		myValue = '<img data-imagename="' + sImage + '" src="'
 				+ myValue
 				+ '" alt="' + prompt('Enter a description of the image', '')
 				+ '" />';
