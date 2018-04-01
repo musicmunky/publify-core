@@ -1,0 +1,52 @@
+<%= form_for([:admin, @pick]) do |f| %>
+<% if @pick.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@pick.errors.count, "error") %> prohibited this pick from being saved:</h2>
+    <ul>
+      <% @pick.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<fieldset class='form-horizontal'>
+  <div class='form-group'>
+    <label class='control-label col-sm-2' for="pick_title">Title</label>
+    <div class='col-sm-5'>
+      <%= f.text_field :title, class: 'form-control' %>
+    </div>
+  </div>
+  <div class='form-group'>
+    <label class='control-label col-sm-2' for="pick_author">Author</label>
+    <div class='col-sm-5'>
+      <%= f.text_field :author, class: 'form-control' %>
+    </div>
+  </div>
+  <div class='form-group'>
+    <label class='control-label col-sm-2' for="pick_description">Description</label>
+    <div class='col-sm-5'>
+      <%= f.text_field :description, class: 'form-control' %>
+    </div>
+  </div>
+  <div class='form-group'>
+    <label class='control-label col-sm-2' for="pick_picktype">Type</label>
+    <div class='col-sm-5'>
+      <%= f.select :picktype, ['book', 'music', 'movie'], { include_blank: false }, class: 'form-control' %>
+    </div>
+  </div>
+  <div class='form-group'>
+    <label class='control-label col-sm-2' for="pick_link">Amazon Link</label>
+    <div class='col-sm-5'>
+      <%= f.text_field :link, class: 'form-control' %>
+    </div>
+  </div>
+</fieldset>
+<div class='form-actions'>
+  <hr>
+  <%= link_to(t(".cancel"), {action: 'index'}) %>
+  <%= t(".or") %>
+  <%= submit_tag(t(".save"), class: 'btn btn-success') %>
+</div>
+
+<% end %>

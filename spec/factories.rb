@@ -2,6 +2,18 @@
 
 # Factory definitions
 FactoryGirl.define do
+  factory :pick do
+    title "MyString"
+    author "MyString"
+    description "MyText"
+    picktype "MyString"
+    link "MyText"
+    score "MyString"
+    isbn "MyString"
+    publisher "MyString"
+    year_published 1
+    pick_length "MyString"
+  end
   sequence(:name) { |n| "name_#{n}" }
   sequence(:body) { |n| "body #{n}" * (n + 3 % 5) }
   sequence(:user) { |n| "user#{n}" }

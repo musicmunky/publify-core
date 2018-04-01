@@ -1,0 +1,25 @@
+<% if @picks.empty? %>
+  <tr>
+    <td colspan="5">
+      No Picks
+    </td>
+  </tr>
+<% end %>
+
+<% for pick in @picks %>
+  <tr>
+    <td>
+      <%= link_to_permalink(pick, pick.title) %>
+      <%= show_actions pick %>
+    </td>
+    <td>
+      <%= pick.author %>
+      <small><%= l(pick.created_at) %></small>
+    </td>
+    <td>
+      <%= pick.picktype %>
+    </td>
+  </tr>
+<% end %>
+
+<%= display_pagination(@picks, 5) %>

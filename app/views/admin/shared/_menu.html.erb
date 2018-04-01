@@ -41,6 +41,7 @@
           </ul>
         </li>
       <% end %>
+        <%= menu_item('Picks', admin_picks_path) %>
       <% if can? :index, 'admin/resources' %>
         <%= menu_item(t('.media_library'), admin_resources_path) %>
       <% end %>
