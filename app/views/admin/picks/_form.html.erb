@@ -1,4 +1,5 @@
 <%= form_for([:admin, @pick]) do |f| %>
+
 <% if @pick.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@pick.errors.count, "error") %> prohibited this pick from being saved:</h2>
@@ -26,7 +27,7 @@
   <div class='form-group'>
     <label class='control-label col-sm-2' for="pick_description">Description</label>
     <div class='col-sm-5'>
-      <%= f.text_field :description, class: 'form-control' %>
+      <%= f.text_area :description, { class: 'form-control', style: 'height:150px;resize:none;' } %>
     </div>
   </div>
   <div class='form-group'>
@@ -41,12 +42,43 @@
       <%= f.text_field :link, class: 'form-control' %>
     </div>
   </div>
+  <div class='form-group'>
+    <label class='control-label col-sm-2' for="pick_link">Score / Rating</label>
+    <div class='col-sm-5'>
+      <%= f.text_field :score, class: 'form-control' %>
+    </div>
+  </div>
+  <div class='form-group'>
+    <label class='control-label col-sm-2' for="pick_link">Length</label>
+    <div class='col-sm-5'>
+      <%= f.text_field :pick_length, class: 'form-control' %>
+    </div>
+  </div>
+  <div class='form-group'>
+    <label class='control-label col-sm-2' for="pick_link">Year Released</label>
+    <div class='col-sm-5'>
+      <%= f.text_field :year_published, class: 'form-control' %>
+    </div>
+  </div>
+  <div class='form-group'>
+    <label class='control-label col-sm-2' for="pick_link">Publisher</label>
+    <div class='col-sm-5'>
+      <%= f.text_field :publisher, class: 'form-control' %>
+    </div>
+  </div>
+  <div class='form-group'>
+    <label class='control-label col-sm-2' for="pick_link">ISBN</label>
+    <div class='col-sm-5'>
+      <%= f.text_field :isbn, class: 'form-control' %>
+    </div>
+  </div>
 </fieldset>
 <div class='form-actions'>
-  <hr>
-  <%= link_to(t(".cancel"), {action: 'index'}) %>
-  <%= t(".or") %>
-  <%= submit_tag(t(".save"), class: 'btn btn-success') %>
+    <hr>
+    <div style="width:100%;float:left;text-align:center;">
+        <%= link_to(t(".cancel"), {action: 'index'}, {class: 'btn btn-danger', style: 'margin-right:20px;'}) %>
+        <%= submit_tag("Save Pick", class: 'btn btn-success') %>
+    </div>
 </div>
 
 <% end %>

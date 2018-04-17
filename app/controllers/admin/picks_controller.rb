@@ -9,45 +9,55 @@ class Admin::PicksController < Admin::BaseController
     #helper :'admin/base'
 
     def index
-        #@search = params[:search] ? params[:search] : {}
-#        @picks = Pick.search_with(@search).pick(params[:pick]).per(this_blog.admin_display_elements)
         @picks = Pick.all
     end
 
     def new
         @pick = Pick.new
-        #@pick.text_filter ||= default_textfilter
-        #@pick.published = true
-        #@pick.user_id = current_user.id
     end
 
     def show
     end
 
     def edit
-        #@pick.text_filter ||= default_textfilter
+        @pick = params[:id] ? Pick.find_by(id: params[:id]) : Pick.new
     end
 
     def create
+        @pick = Pick.new(pick_params)
+
+        if @pick.save
+            flash[:notice] = "Pick successfully created!"
+        else
+            flash[:error] = @pick.errors.full_messages
+        end
+        redirect_to admin_picks_url
     end
-    
+
     def update
     end
-    
+
     def destroy
+        @pick.destroy if Pick.where(id: params[:id]).count > 1
+        redirect_to admin_picks_url
     end
-    
+
     private
 
     def get_layout
         case action_name
         when 'new', 'edit', 'create'
-            'editor'
+            'administration'
+#            'editor'
         when 'show'
             nil
         else
             'administration'
         end
+    end
+
+    def pick_params
+        params.require(:pick).permit(:title, :author, :description, :picktype, :link, :score, :pick_length, :year_published, :publisher, :isbn)
     end
 
 end

@@ -33,4 +33,11 @@ class Pick < ActiveRecord::Base
     #  only_path: only_path
     #)
   end
+
+  def short_url
+    # Double check because of crappy data in my own old database
+#    return unless published && redirect.present?
+#    redirect.from_url
+  end
+
 end
