@@ -96,7 +96,11 @@ Rails.application.routes.draw do
 
     resources :pages, only: [:index, :new, :edit, :create, :update, :destroy], format: false
 
-    resources :picks, only: [:index, :new, :edit, :create, :update, :destroy], format: false
+    resources :picks, only: [:index, :new, :edit, :create, :update, :destroy], format: false do
+      member do
+        post 'changePickActive'
+      end
+    end
 
     resources :post_types, only: [:index, :edit, :create, :update, :destroy], format: false
 

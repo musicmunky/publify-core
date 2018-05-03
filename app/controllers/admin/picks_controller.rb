@@ -48,6 +48,45 @@ class Admin::PicksController < Admin::BaseController
         redirect_to admin_picks_url
     end
 
+
+    def changePickActive
+        nActive = params[:nActive]
+        nPickId = params[:nPickId]
+
+		response = {}
+		content  = {}
+		status   = ""
+		message  = ""
+
+		begin
+            pid = Integer(nPickId)
+            act = Integer(nActive)
+
+			if pid < 1
+                raise "Invalid pick id sent to server: #{pid}"
+            end
+
+            @oPick = Pick.find(pid)
+            @oPick.update_attribute(:active, Integer(act))
+
+			response['status']  = "success"
+			response['message'] = "Updated active for pick id #{pid}"
+			response['content'] = content
+#            flash[:success] = "Pick successfully updated!"
+        rescue => error
+			response['status'] = "failure"
+			response['message'] = "Error: #{error.message}"
+			response['content'] = error.backtrace
+#            flash[:error] = "There was an error updating this pick: #{error.message}"
+        ensure
+			respond_to do |format|
+#                format.html { redirect_to admin_picks_url }
+                format.js { render :json => response.to_json }
+			end
+		end
+    end
+
+
     private
 
     def get_layout
@@ -63,7 +102,7 @@ class Admin::PicksController < Admin::BaseController
     end
 
     def pick_params
-        params.require(:pick).permit(:title, :author, :description, :picktype, :image_link, :link, :score, :pick_length, :year_published, :publisher, :isbn)
+        params.require(:pick).permit(:title, :author, :description, :picktype, :image_link, :link, :score, :pick_length, :year_published, :publisher, :isbn, :active)
     end
 
     def find_pick

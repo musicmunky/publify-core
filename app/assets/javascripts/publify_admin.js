@@ -28,6 +28,7 @@
 //= require sidebar
 //= require spinnable
 //= require lightbox
+//= require admin_functions
 //
 //= require_self
 

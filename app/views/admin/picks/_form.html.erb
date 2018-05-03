@@ -31,6 +31,16 @@
     </div>
   </div>
   <div class='form-group'>
+    <label class='control-label col-sm-2' for="active">Pick Active?</label>
+
+
+    <div class='col-sm-5'>
+        <%= f.radio_button :active, 1, { checked: @pick.active, style: "margin-top:10px;" } %> Active
+        <%= f.radio_button :active, 0, { checked: !@pick.active, style: "margin-left:10px;margin-top:10px;" } %> Inactive
+    </div>
+  </div>
+
+  <div class='form-group'>
     <label class='control-label col-sm-2' for="pick_picktype">Type</label>
     <div class='col-sm-5'>
       <%= f.select :picktype, ['book', 'music', 'movie'], { include_blank: false }, class: 'form-control' %>

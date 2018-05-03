@@ -17,6 +17,13 @@
       <small><%= l(pick.created_at) %></small>
     </td>
     <td>
+        <% chkd = "" %>
+        <% if pick.active %>
+            <% chkd = "checked" %>
+        <% end %>
+      <input type="checkbox" class="active_picks_chk" id="pick_active_<%= pick.id %>" <%= chkd %> onchange="checkActivePicks(this)" />
+    </td>
+    <td>
       <%= pick.picktype %>
     </td>
   </tr>
