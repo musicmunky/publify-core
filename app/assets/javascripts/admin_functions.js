@@ -38,6 +38,4 @@ function checkActivePicks(t)
             // anything need to happen here?
         }
     });
-
-    console.log("BCHECKED IS: " + bChecked);
 }

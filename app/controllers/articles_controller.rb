@@ -19,6 +19,63 @@ class ArticlesController < ContentController
         end
         @articles = articles_base.includes(:user).where(conditions).page(params[:page]).per(limit)
 
+        @aArticles = {}
+
+        for oArticle in @articles do
+            begin
+                @aTmp = {}
+                oContent = Nokogiri::HTML.fragment(oArticle.body)
+                oImg = oContent.search('img')
+                oSummary = oContent.search('figcaption')
+
+                sImg = ""
+                sTxt = ""
+                sLink = ""
+                sImgSrc = ""
+                sImgName = ""
+                nImgId = 0
+                sDate = ""
+                sTitle = ""
+
+                oDate = Time.parse(oArticle.published_at.to_s)
+                sMonth = '%02d' % oDate.month
+                sDay = '%02d' % oDate.day
+                sLink = "blog/#{oDate.year}/#{sMonth}/#{sDay}/#{oArticle.permalink}"
+                sDate = oArticle.published_at.strftime("%^b %-d, %Y")
+                sTitle = oArticle.title
+
+                if oSummary.size > 0
+                    sTxt = oSummary.first.inner_html
+                end
+
+                if oImg.size > 0
+                    eImg = oImg.first
+                    sImgSrc = eImg['src']
+                    nImgId = 0
+
+                    if sImgSrc != ""
+                        aImgSrc = sImgSrc.split("/")
+                        nImgId = aImgSrc[aImgSrc.size - 2]
+                    end
+
+                    sImgName = eImg['data-imagename']
+                end
+
+            rescue => error
+                logger.debug "\n ---- ERROR PARSING HTML: #{error.message} ---- \n"
+            ensure
+                @aTmp['link']  = sLink
+                @aTmp['title'] = sTitle
+                @aTmp['date']  = sDate
+                @aTmp['text']  = sTxt
+                @aTmp['image_src']  = sImgSrc
+                @aTmp['image_name'] = sImgName
+                @aTmp['image_id']   = nImgId
+
+                @aArticles[oArticle.id] = @aTmp
+            end
+        end
+
         @page_title = this_blog.home_title_template
         @description = this_blog.home_desc_template
         if params[:year]
